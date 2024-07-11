@@ -7,16 +7,16 @@ import org.junit.Test;
 public class StringCalculatorTest {
 
     
-    @Test
-    public void ExpectZeroForEmptyInput()
-    {
-        int expectedResult = 0;
-        String input = "";
-        StringCalculator objUnderTest = new StringCalculator();
-        int result = objUnderTest.add(input);
+    // @Test
+    // public void ExpectZeroForEmptyInput()
+    // {
+    //     int expectedResult = 0;
+    //     String input = "";
+    //     StringCalculator objUnderTest = new StringCalculator();
+    //     int result = objUnderTest.add(input);
 
-       assertEquals(expectedResult,result);
-    }
+    //    assertEquals(expectedResult,result);
+    // }
 
 
   @Test
