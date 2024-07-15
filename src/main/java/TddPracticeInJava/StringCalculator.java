@@ -32,6 +32,13 @@ public class StringCalculator {
     }
 
     private void validateNoNegatives(String[] tokens) {
+        List<Integer> negatives = findNegatives(tokens);
+        if (!negatives.isEmpty()) {
+            throw new IllegalArgumentException("Negatives not allowed: " + negatives);
+        }
+    }
+
+    private List<Integer> findNegatives(String[] tokens) {
         List<Integer> negatives = new ArrayList<>();
         for (String token : tokens) {
             if (!token.isEmpty()) {
@@ -41,22 +48,31 @@ public class StringCalculator {
                 }
             }
         }
-        if (!negatives.isEmpty()) {
-            throw new IllegalArgumentException("Negatives not allowed: " + negatives);
-        }
+        return negatives;
     }
 
     private int sumTokens(String[] tokens) {
-        int sum = 0;
+        return sumFilteredNumbers(filterValidNumbers(tokens));
+    }
+
+    private List<Integer> filterValidNumbers(String[] tokens) {
+        List<Integer> validNumbers = new ArrayList<>();
         for (String token : tokens) {
             if (!token.isEmpty()) {
                 int number = Integer.parseInt(token);
                 if (number <= 1000) {
-                    sum += number;
+                    validNumbers.add(number);
                 }
             }
+        }
+        return validNumbers;
+    }
+
+    private int sumFilteredNumbers(List<Integer> numbers) {
+        int sum = 0;
+        for (int number : numbers) {
+            sum += number;
         }
         return sum;
     }
 }
-
