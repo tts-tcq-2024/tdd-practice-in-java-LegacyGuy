@@ -17,7 +17,12 @@ public class StringCalculator {
         }
 
         String[] tokens = splitNumbers(numbersWithoutDelimiter, delimiter);
-        return calculateSum(tokens);
+        List<Integer> negatives = findNegatives(tokens);
+        if (!negatives.isEmpty()) {
+            throw new IllegalArgumentException("Negatives not allowed: " + negatives);
+        }
+
+        return sumNumbers(tokens);
     }
 
     private String parseDelimiters(String numbers) {
@@ -29,25 +34,29 @@ public class StringCalculator {
         return numbers.split(delimiter + "|\n");
     }
 
-    private int calculateSum(String[] tokens) {
-        int sum = 0;
+    private List<Integer> findNegatives(String[] tokens) {
         List<Integer> negatives = new ArrayList<>();
-
         for (String token : tokens) {
             if (!token.isEmpty()) {
                 int number = Integer.parseInt(token);
                 if (number < 0) {
                     negatives.add(number);
-                } else if (number <= 1000) {
+                }
+            }
+        }
+        return negatives;
+    }
+
+    private int sumNumbers(String[] tokens) {
+        int sum = 0;
+        for (String token : tokens) {
+            if (!token.isEmpty()) {
+                int number = Integer.parseInt(token);
+                if (number <= 1000) {
                     sum += number;
                 }
             }
         }
-
-        if (!negatives.isEmpty()) {
-            throw new IllegalArgumentException("Negatives not allowed: " + negatives);
-        }
-
         return sum;
     }
 }
