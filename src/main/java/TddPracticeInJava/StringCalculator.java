@@ -41,14 +41,15 @@ public class StringCalculator {
     private List<Integer> findNegatives(String[] tokens) {
         List<Integer> negatives = new ArrayList<>();
         for (String token : tokens) {
-            if (!token.isEmpty()) {
-                int number = Integer.parseInt(token);
-                if (number < 0) {
-                    negatives.add(number);
-                }
+            if (isNegative(token)) {
+                negatives.add(Integer.parseInt(token));
             }
         }
         return negatives;
+    }
+
+    private boolean isNegative(String token) {
+        return !token.isEmpty() && Integer.parseInt(token) < 0;
     }
 
     private int sumTokens(String[] tokens) {
@@ -58,14 +59,15 @@ public class StringCalculator {
     private List<Integer> filterValidNumbers(String[] tokens) {
         List<Integer> validNumbers = new ArrayList<>();
         for (String token : tokens) {
-            if (!token.isEmpty()) {
-                int number = Integer.parseInt(token);
-                if (number <= 1000) {
-                    validNumbers.add(number);
-                }
+            if (isValidNumber(token)) {
+                validNumbers.add(Integer.parseInt(token));
             }
         }
         return validNumbers;
+    }
+
+    private boolean isValidNumber(String token) {
+        return !token.isEmpty() && Integer.parseInt(token) <= 1000;
     }
 
     private int sumFilteredNumbers(List<Integer> numbers) {
